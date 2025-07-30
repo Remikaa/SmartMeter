@@ -1,0 +1,16 @@
+/* Aggressive CSS reset for all elements and Angular root */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+html, body, app-dashboard2, #app-root {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+}

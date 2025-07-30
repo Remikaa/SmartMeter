@@ -1,0 +1,170 @@
+<div class="dashboard-container">
+  <header class="dashboard-header">
+    <h1>⚡ Smart Meter Dashboard</h1>
+  </header>
+
+  <div class="dashboard-content">
+    <div class="section-grid">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">🔌</div>
+          <div class="card-title">Serial Port Configuration</div>
+          <div
+            class="status-indicator"
+            [ngClass]="isConnected ? 'status-connected' : 'status-disconnected'"
+          >
+            {{ isConnected ? "Connected" : "Disconnected" }}
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">COM Port</label>
+            <select class="form-select" [(ngModel)]="serialConfig.comPort">
+              <option *ngFor="let port of comPorts" [value]="port">
+                {{ port }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Baud Rate</label>
+            <select class="form-select" [(ngModel)]="serialConfig.baudRate">
+              <option *ngFor="let rate of baudRates" [value]="rate">
+                {{ rate }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Data Bits</label>
+            <input
+              type="number"
+              class="form-input"
+              [(ngModel)]="serialConfig.dataBits"
+              min="5"
+              max="8"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Parity</label>
+            <select class="form-select" [(ngModel)]="serialConfig.parity">
+              <option *ngFor="let parity of parityOptions" [value]="parity">
+                {{ parity }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Stop Bits</label>
+            <select class="form-select" [(ngModel)]="serialConfig.stopBits">
+              <option *ngFor="let bits of stopBitsOptions" [value]="bits">
+                {{ bits }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <!-- start Client Configuration here -->
+
+        <div class="card-header">
+          <div class="card-icon">👤</div>
+          <div class="card-title">Client Configuration</div>
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Client Address</label>
+            <input
+              type="number"
+              class="form-input"
+              [(ngModel)]="clientConfig.clientAddr"
+              min="1"
+              placeholder="Enter client address"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Server Address</label>
+            <input
+              type="number"
+              class="form-input"
+              [(ngModel)]="clientConfig.serverAddr"
+              min="1"
+              placeholder="Enter server address"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Authentication Type</label>
+            <select class="form-select" [(ngModel)]="clientConfig.authType">
+              <option *ngFor="let auth of authTypes" [value]="auth">
+                {{ auth }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <input
+              type="password"
+              class="form-input"
+              [(ngModel)]="clientConfig.password"
+              placeholder="Enter password"
+            />
+          </div>
+        </div>
+
+
+        <button class="btn btn-success" (click)="toggleConnection()">
+          {{ isConnected ? "🔗 Disconnect" : "🔗 Connect" }}
+        </button>
+      </div>
+    </div>
+
+    <div class="section-grid">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">📊</div>
+          <div class="card-title">Meter Information</div>
+        </div>
+        <div class="meter-display">
+          <div class="meter-card">
+            <div class="meter-value">{{ meterData.energy }}</div>
+            <div class="meter-label">Energy (kWh)</div>
+          </div>
+          <div class="meter-card">
+            <div class="meter-value">{{ meterData.time }}</div>
+            <div class="meter-label">Meter Time</div>
+          </div>
+        </div>
+        <button class="btn" (click)="syncData()">🔄 Sync Data</button>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">🔧</div>
+          <div class="card-title">Relay Control</div>
+        </div>
+        <div class="relay-controls">
+          <div class="meter-card">
+            <div class="meter-value">{{ relayState.state }}</div>
+            <div class="meter-label">Relay State</div>
+          </div>
+          <div class="meter-card">
+            <div class="meter-value">{{ relayState.output }}</div>
+            <div class="meter-label">Output State</div>
+          </div>
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-danger" (click)="disconnectRelay()">
+            ❌ Disconnect
+          </button>
+          <button class="btn btn-success" (click)="reconnectRelay()">
+            ✅ Reconnect
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">💻</div>
+        <div class="card-title">System Console</div>
+      </div>
+      <div class="console" #consoleRef>{{ consoleOutput }}</div>
+    </div>
+  </div>
+</div>
