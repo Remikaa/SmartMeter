@@ -1,0 +1,4 @@
+1. Put the .json file in a folder calles "resources"
+2. The package that these src files were in is com.Meter.IskraemcoInterns
+3.Make sure you download the dependencies, listed in the pom.xml file
+Make sure the JSON configurations are right for your meter and device (they differ from meter to meter and device to device)
