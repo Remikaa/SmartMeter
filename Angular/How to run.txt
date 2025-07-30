@@ -1,0 +1,2 @@
+1. download all the needed modules and dependencies like the node modules and bootstrap modules and so
+2. put the src folder instead of the generated src folder.
