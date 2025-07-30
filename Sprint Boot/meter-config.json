@@ -1,0 +1,16 @@
+{
+  "server": {
+    "port": "COM4",
+    "baudRate": 300,
+    "dataBits": 7,
+    "stopBits": "1",
+    "parity": "EVEN"
+  },
+  "client": {
+    "clientAddress": 1,
+    "serverAddress": 145,
+    "authentication": "LOW",
+    "password": "12345678",
+    "interfaceType": "HDLC_WITH_MODE_E"
+  }
+}
